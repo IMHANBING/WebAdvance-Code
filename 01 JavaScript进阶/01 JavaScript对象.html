@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象</title>
+</head>
+<body>
+
+
+<script>
+
+    // Javascript对象
+    let person = {
+        name: 'zhangsan',
+        age: 19,
+        sayName: function () {
+            console.log('My name is' + name);
+        }
+    }
+
+    let book = {
+        name: 'js'
+    }
+
+
+    // 属性访问
+    console.log(person.name);
+
+    // 对象解构：把对象里面的属性拆分成变量，方便直接使用
+    let {name: personName, age: personAge} = person;
+    /* let {name, age} = person;*/
+
+    console.log(personName);
+
+    let {name} = book;
+
+    console.log(name);
+
+
+</script>
+
+</body>
+</html>
