@@ -36,6 +36,42 @@
 
     console.log(name);
 
+    // 对象的创建
+    // 1 字面量创建对象
+    let myAlfaRomeo = {
+        color: 'red',
+        wheels: 4,
+        engine: {
+            cylinders: 4,
+            size: 2.2
+        }
+    }
+
+    // 对象的属性访问
+    console.log('my Alfa-Romeo:');
+    console.log(myAlfaRomeo);
+
+    console.log(myAlfaRomeo.color);
+    console.log(myAlfaRomeo.engine);
+
+    // 对象解构
+    let {color, wheels, engine} = myAlfaRomeo;
+    console.log(engine, color, wheels);
+
+    // 2 构造函数方法创建对象
+    // 2.1 先定义一个构造函数
+    function Car(make,model,year) {
+        this.make = make;       // 通过this把局部变量make，model，year绑定到Car上
+        this.model = model;
+        this.year = year;
+    }
+
+    // 2.2 创建对象
+    let myCar = new Car('Mercedes-Benz','AMG W13',2022);
+
+    // 2.3 使用对象
+    console.log(myCar);
+
 
 </script>
 

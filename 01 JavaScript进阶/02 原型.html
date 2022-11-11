@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型</title>
+</head>
+<body>
+
+
+<script>
+
+    // 原型的概念
+    /* 每个构造函数都默认获得一个属性protocol，
+       这个protocol属性的值，是一个对象：这个对象叫做这个函数的原型对象
+       原型对象默认获得一个属性：construct，这个construct的值指向构造函数本身
+    */
+
+    function Person() {
+
+    }
+
+    Person.prototype;
+
+
+    console.log('Person.prototype = ');
+    console.log(Person.prototype)
+
+    let PersonType = Person.prototype;
+    console.log('Person.prototype = ');
+    console.log(PersonType.constructor);
+
+
+    // 实例
+    let person1 = new Person();
+    // 每个对象都有一个隐藏的的属性[[Prototype]]，这个属性在Chrome下，可以通过 __proto__ 获得
+    console.log('person1 = ');
+    console.log(person1);
+    console.log('person1.__proto__ = ');
+    console.log(person1.__proto__);
+
+    console.log(person1.name)
+
+
+    // 通过Object.create方法，创建对象
+    // 得到的新对象 的 隐藏属性[Prototype]，会指向 被引用的对象
+    let myAlfaRomeo = {
+        color: 'red',
+        wheels: 4,
+        engine: {
+            cylinders: 4,
+            size: 2.2
+        }
+    }
+
+    let myCar = Object.create(myAlfaRomeo);
+    console.log('myCar : ');
+    console.log(myCar);
+    console.log(myCar.color);
+    console.log('myCar.__proto__ : ')
+    console.log(myCar.__proto__)
+
+
+    // 构造函数继承 (原型类)
+    // 先定义一个父构造函数
+    function SuperType() {
+        this.name = '父构造函数';
+        this.action = function () {
+            console.log('这是父构造函数的action行为');
+        }
+    }
+
+    // 再定义一个子构造函数
+    function SubType() {
+        this.subName = '子构造函数';
+        this.subAction = function () {
+            console.log('这是子构造函数的action行为');
+        }
+    }
+
+    console.log('SubType.prototype默认值：');
+    console.log(SubType.prototype);
+
+    // 现在重新给SubType.prototype赋予一个新的对象
+    SubType.prototype = new SuperType();
+    console.log('SubType.prototype重新赋值后的：')
+    console.log(SubType.prototype);
+
+    let sub1 = new SubType();
+
+    sub1.subAction();
+    sub1.action();
+
+    // 对象直接继承(原型式继承)
+    let person2 = new Person();
+
+    let superMan = {
+        fly: function () {
+            console.log('我会飞');
+        }
+    }
+
+    // 修改对象的__proto__属性
+    person2.__proto__ = superMan;
+
+    console.log(person2.__proto__);
+    person2.fly();
+
+    let person3 = Object.create(superMan);
+
+
+</script>
+
+</body>
+</html>
