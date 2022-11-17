@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数参数</title>
+</head>
+<body>
+
+<script>
+
+    // Rest参数：可以处理任意多个实参数
+
+    function sum(a, b) {
+        return a + b
+    }
+
+    console.log(sum(1, 2, 3, 4, 5, 6))
+
+    // 使用Rest语法
+    function sumAll(...args) {
+        let sum = 0
+        for (let i = 0; i < args.length; i++) {
+            sum = sum + args[i]
+        }
+        return sum
+    }
+
+    console.log(sumAll(1))
+    console.log(sumAll(1, 2))
+    console.log(sumAll(1, 2, 3, 4, 5, 6))
+
+    // 固定参数 + rest参数
+    function showName(firstName, lastName, ...titles) {
+        console.log(firstName)
+        console.log(lastName)
+        for (let i = 0; i < titles.length; i++) {
+            console.log(titles[i])
+        }
+    }
+
+    showName('Julius','Caesar','Consul','Emperor')
+
+    // arguments对象：接收传给函数的所有实参，可以迭代
+    function showArguments() {
+        console.log(arguments.length)
+        for (let i = 0; i < arguments.length; i++) {
+            console.log(arguments[i])
+        }
+    }
+    showArguments()
+    showArguments(1,'a',{a:1})
+
+    // spread语法：处理调用函数时，多实参情况
+    let arr = [2,4,6,23,7,8,12]
+    // 传统写法
+    let max = Math.max(arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6])
+    console.log(max)
+
+    // spread语法，自动暂开
+    let max1 = Math.max(...arr)
+    console.log(max1)
+
+</script>
+
+</body>
+</html>

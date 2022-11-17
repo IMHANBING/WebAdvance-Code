@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变量作用域及闭包</title>
+</head>
+<body>
+
+
+<script>
+
+    // 全局作用域：在script顶层定义的变量和函数，具有全局的作用域
+    let studentName = "张三丰";
+
+    function doSomething() {
+        let schoolName = "hbxy";
+
+        function innerSay() {
+            console.log(schoolName);
+        }
+
+        innerSay();
+    }
+
+    // studentName有全局作⽤用域 console.log(studentName); console.log(schoolName); //脚本错误 //doSomething()有全局作⽤用域
+    doSomething();
+    // innerSay() //脚本错误
+    // 2 函数作⽤用域
+    function doSomething2() {
+        let schoolName2 = "hbxy";
+
+        function innerSay2() {
+            console.log(schoolName2);
+        }
+
+        innerSay2();
+    }
+
+    // schoolName2,innerSay2只能在声明的函数内使⽤用 海滨学院 console.log(schoolName2);//脚本错误
+    // innerSay2() //脚本错误
+    // 3 块作⽤用域
+    // 3.1 ⼀一个代码块
+    {
+    let message = "Hello"; // 只在此代码块内可⻅见
+    console.log(message); // Hello
+    }
+    // console.log(message); // 抛出错误: message is not defined
+    // 3.2 ⼆二个代码块
+
+    {
+        // 显示 message
+        let message = "Hello world";
+        console.log(message);
+    }
+    {
+    }
+    // 3.3 if，for 和 while 代码块
+    // 在 {...} 中声明的变量量也仅在内部可⻅见:
+    for (let i = 0; i < 3; i++) {
+        // 变量量 i 仅在这个 for 循环的内部可⻅见 console.log(i); // 0，然后是 1，然后是 2
+    }
+    // console.log(i); // 报错: no such variable
+
+    // 闭包：一个函数作为外部函数的结果（值）返回，这个返回的函数如果引用了其之外的变量，
+    // js会把引用的变量和这个函数进行捆绑，这个组合就是一个闭包
+
+    // 定义一个创造计数器对象的一个函数
+    function makeCounter() {
+        let privateCount = 0
+
+        let counter = {
+            increment: function () {
+                privateCount++
+            },
+            decrement: function () {
+                privateCount--
+            },
+            value: function () {
+                return privateCount
+            }
+        }
+        return counter
+    }
+
+    // 创建实例
+    let counter1 = makeCounter()
+    let counter2 = makeCounter()
+
+    console.log('counter1.value() = ' + counter1.value())
+    console.log('counter2.value() = ' + counter2.value())
+
+    counter1.increment()
+    counter2.increment()
+
+    console.log('counter1.value() = ' + counter1.value())
+    console.log('counter2.value() = ' + counter2.value())
+
+    counter1.decrement()
+    counter2.decrement()
+
+    console.log('counter1.value() = ' + counter1.value())
+    console.log('counter2.value() = ' + counter2.value())
+
+</script>
+
+</body>
+</html>

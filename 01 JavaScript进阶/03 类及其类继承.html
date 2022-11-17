@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类及类继承</title>
+</head>
+<body>
+
+<script>
+
+    // 定义类
+    // 类声明方式
+    class Person {
+        // 实例成员：在构造器内定义的变量/方法
+        constructor(name, age) {
+            this.name = name
+            this.age = age
+            this.study = function () {
+                console.log(this.name + '正在学习...')
+            }
+        }
+
+        // 原型成员：在类块一级定义的属性方法
+        locate() {
+            console.log('河北')
+        }
+
+        // getter/setter方法
+        set nickname(newname) {
+            this._nickname = newname
+        }
+
+        get nickname() {
+            return this._nickname
+        }
+
+        // 静态成员：使用static关键字定义
+        static work() {
+            console.log('正在写作业')
+        }
+    }
+
+    let p1 = new Person('张三', 19)
+    console.log(p1.name)
+    p1.study()
+    p1.locate()
+    Person.prototype.locate()
+    p1.nickname = '张三三'
+    console.log(p1.nickname)
+
+    Person.work()
+
+    let p2 = new Person('李四', 20)
+    console.log(p2.name)
+    p2.study()
+
+    console.log('——————————————————————————————————————————————————————————')
+
+    // 类继承
+    // 定义一个父类
+    // 类表达式方式
+    const Animal = class {
+        constructor(name) {
+            this.name = name
+            this.speed
+        }
+
+        run(speed) {
+            this.speed = speed
+            console.log(`${this.name}奔跑速度为${this.speed}`) // `${}` 模版字符串
+        }
+
+        stop() {
+            this.speed = 0
+            console.log(`${this.name}停止了`)
+        }
+    }
+
+    // 定义一个子类
+    class Rabbit extends Animal {
+        hidden() {
+            console.log(`${this.name}藏起来了`)
+        }
+    }
+
+    //
+    let rabbit = new Rabbit('🐰')
+    rabbit.run(5)
+    rabbit.hidden()
+    rabbit.stop()
+
+</script>
+
+</body>
+</html>
