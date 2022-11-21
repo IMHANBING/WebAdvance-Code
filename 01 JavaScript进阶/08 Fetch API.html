@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch API</title>
+    <link rel="stylesheet" href="CSS/table.css">
+</head>
+<body>
+<table width="80%"
+       border="0"
+       cellpadding="5"
+       cellspacing="0"
+       align="center">
+    <tr>
+        <td>
+            班级列表
+            <input type="button" value="通过fetch获取数据" onclick="getData()">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table id="mytable"
+                   border="1"
+                   width="100%"
+                   cellspacing="0"
+                   cellpadding="5">
+                <tr>
+                    <td>班级id</td>
+                    <td>班级名称</td>
+                    <td>班级编号</td>
+                    <td>班级简介</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <form name="myform">
+                <table border="1"
+                       width="100%"
+                       cellspacing="0"
+                       cellpadding="5">
+                    <tr>
+                        <td colspan="2">添加班级</td>
+                    </tr>
+                    <tr>
+                        <td>班级id</td>
+                        <td><input id="clazzId" value="10001"></td>
+                    </tr>
+                    <tr>
+                        <td>班级名称</td>
+                        <td><input id="clazzName" value="软件1801"></td>
+                    </tr>
+                    <tr>
+                        <td>班级编号</td>
+                        <td><input id="clazzCode" value="rj1801"></td>
+                    </tr>
+                    <tr>
+                        <td>班级简介</td>
+                        <td><input id="clazzDescription" value="软件1801">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="button" value="通过fetch提交数据" onclick="save()">
+        </td>
+    </tr>
+</table>
+<script>
+
+    function getData() {
+        // 定义url
+        let url = 'http://localhost:3000/clazz'
+
+        // 使用fetch，使用promise的链式调用方法
+        fetch(url).then((response) => {
+                    return response.json()
+                }
+        ).then(
+                (data) => {
+                    // 往表格添加数据
+                    // 1 获得表格容器
+                    let mytable = document.getElementById('mytable');
+                    let mytbody = mytable.getElementsByTagName('tbody')[0]
+                    data.forEach(clazz => {
+                                let newRow = mytbody.insertRow(mytbody.rows.length);
+                                //3.1 插入新单元格
+                                let col0 = newRow.insertCell(0);
+                                // 3.2 单元格赋值
+                                col0.innerHTML = clazz.clazzId;
+                                let col1 = newRow.insertCell(1);
+                                col1.innerHTML = clazz.clazzName;
+                                let col2 = newRow.insertCell(2);
+                                col2.innerHTML = clazz.clazzCode;
+                                let col3 = newRow.insertCell(3);
+                                col3.innerHTML = clazz.clazzDescription;
+                            }
+                    )
+                })
+    }
+
+    //可以用async-await：用同步调用的方式  执行  异步调用代码
+    async function getData() {
+        let url = 'http://localhost:3000/clazz';
+        let respose = await fetch(url);
+        let data = await respose.json();
+
+        //往表格添加数据
+        //1 获得表格容器
+        let mytable = document.getElementById('mytable')
+        let mytbody = mytable.getElementsByTagName('tbody')[0]
+        //2 插⼊新⾏
+        data.forEach(clazz => {
+            let newRow = mytbody.insertRow(mytbody.rows.length);
+            //3.1 插入新单元格
+            let col0 = newRow.insertCell(0);
+            // 3.2 单元格赋值
+            col0.innerHTML = clazz.clazzId;
+            let col1 = newRow.insertCell(1);
+            col1.innerHTML = clazz.clazzName;
+            let col2 = newRow.insertCell(2);
+            col2.innerHTML = clazz.clazzCode;
+            let col3 = newRow.insertCell(3);
+            col3.innerHTML = clazz.clazzDescription;
+        })
+    }
+
+    async function save() {
+
+        // 从表单获得数据,构造要发送的数据格式:json
+        let data = {
+            "id": Math.ceil(Math.random() * 1000),
+            "clazzId": document.getElementById('clazzId').value,
+            "clazzName": document.getElementById('clazzName').value,
+            "clazzCode": document.getElementById('clazzCode').value,
+            "clazzDescription": document.getElementById('clazzDescription').value
+        }
+        // 要发送的地址
+        let url = 'http://localhost:3000/clazz';
+        // 封装消息
+        let msg = {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        }
+        // 得到相应消息
+        let response = await fetch(url, msg)
+        //抽取json数据
+        let result = await response.json()
+        console.log(result);
+        //往表格添加数据
+        //1 获得表格容器
+        let mytable = document.getElementById("mytable")
+        let rowNums = mytable.rows.length;
+        //2 插⼊新⾏
+        let newRow = mytable.insertRow(rowNums);
+        //3.1 插⼊新单元格
+        let col1 = newRow.insertCell(0);
+        //3.2 单元格赋值
+        col1.innerHTML = result.clazzId;
+        let col2 = newRow.insertCell(1);
+        col2.innerHTML = result.clazzName;
+        let col3 = newRow.insertCell(2);
+        col3.innerHTML = result.clazzCode;
+        let col4 = newRow.insertCell(3);
+        col4.innerHTML = result.clazzDescription;
+
+        // 清空表格
+        document.getElementById('clazzId').value = ''
+        document.getElementById('clazzName').value = ''
+        document.getElementById('clazzCode').value = ''
+        document.getElementById('clazzDescription').value = ''
+    }
+
+
+</script>
+
+</body>
+</html>

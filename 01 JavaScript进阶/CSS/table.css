@@ -1,0 +1,61 @@
+table{
+    margin: 0 auto;
+    table-layout: fixed;
+    width: 90%;
+    color: lightseagreen;
+    background-color: lightcyan;
+    border: 2px dashed cornflowerblue;
+    border-collapse: collapse;
+    opacity: 0.89;
+    font-size: 20px;
+    font-family: Helvetica;
+}
+
+th{
+    padding: 15px;
+}
+td{
+    padding: 15px;
+    text-align: center;
+}
+
+tbody tr:nth-child(odd){
+    background-color: azure;
+}
+tbody tr:nth-child(even){
+    background-color: lightcyan;
+}
+thead,tfoot{
+    background-color: lightblue;
+}
+
+button {
+     color: cornflowerblue;
+     background-color: lightcyan;
+     border: cornflowerblue 2px dotted;
+     border-radius: 10px;
+    font-size: 20px;
+ }
+
+button:hover {
+    color: lavender;
+    background-color: slateblue;
+    border: 2px dotted aquamarine;
+    border-radius: 10px;
+}
+
+button:active {
+    color: lightcyan;
+    background-color: aquamarine;
+    border: 2px dotted lavender;
+    border-radius: 10px;
+}
+
+input {
+    width: 200px;
+    color: mediumslateblue;
+    background-color: aliceblue;
+    font-size: 20px;
+    border: 2px dashed cornflowerblue;
+    border-radius: 10px;
+}

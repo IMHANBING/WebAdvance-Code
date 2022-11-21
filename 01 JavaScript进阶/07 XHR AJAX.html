@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XHR</title>
+    <link rel="stylesheet" href="CSS/table.css">
+</head>
+<body>
+
+<table border="0" width="60%" align="center">
+    <tr>
+        <td>
+            班级列表
+            <button type="button" onclick="getData()">获取数据</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table border="1" width="100%" cellspacing="0" cellpadding="5">
+                <thead>
+                <tr>
+                    <th>班级id</th>
+                    <th>班级名称</th>
+                    <th>班级编号</th>
+                    <th>说明</th>
+                </tr>
+                </thead>
+
+                <tbody id="mytbody">
+
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form id="frm" action="" method="post">
+                <table width="100%" border="1" cellspacing="0" cellpadding="5">
+                    <tr>
+                        <td width="30%" align="right">班级id</td>
+                        <td><input type="text" id="clazzId"></td>
+                    </tr>
+                    <tr>
+                        <td width="30%" align="right">班级名称</td>
+                        <td><input type="text" id="clazzName"></td>
+                    </tr>
+                    <tr>
+                        <td width="30%" align="right">班级编码</td>
+                        <td><input type="text" id="clazzCode"></td>
+                    </tr>
+                    <tr>
+                        <td width="30%" align="right">说明</td>
+                        <td><input type="text" id="clazzDescription"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <button type="button" onclick="save()">保存</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </td>
+    </tr>
+</table>
+
+
+<script>
+
+    getData()
+
+    function getData() {
+
+        // 1 使用Ajax从服务器端获得数据
+        // 1.1 创建xhr对象
+        let xhr = new XMLHttpRequest()
+        // 初始化xhr
+        xhr.open('get', 'http://localhost:3000/clazz')
+        // 发送请求
+        xhr.send()
+        // 注册回调函数
+        xhr.onload = function () {
+            // 先判断状态是否成功
+            if (xhr.status == 200 || xhr.status == 201) {
+                console.log(xhr.response)
+                let data = JSON.parse(xhr.response)
+
+                let mytbody = document.getElementById('mytbody')
+                mytbody.innerHTML = ''
+                data.forEach(clazz => {
+                    let newRow = mytbody.insertRow(mytbody.rows.length);
+                    let col1 = newRow.insertCell(0);
+                    col1.innerHTML = clazz.clazzId;
+                    let col2 = newRow.insertCell(1);
+                    col2.innerHTML = clazz.clazzName;
+                    let col3 = newRow.insertCell(2);
+                    col3.innerHTML = clazz.clazzCode;
+                    let col4 = newRow.insertCell(3);
+                    col4.innerHTML = clazz.clazzDescription;
+                })
+            } else {
+                alert('请求出错，' + xhr.status + xhr.statusText);
+            }
+
+            // 处理失败的回调函数
+            xhr.onerror = function () {
+                console.log('wrong')
+            }
+        }
+    }
+
+    function save() {
+        //从表单获取数据，构造json
+        let clazz = {
+            "id": Math.ceil(Math.random() * 1000), //随机数作id
+            "clazzId": document.getElementById('clazzId').value,
+            "clazzName": document.getElementById('clazzName').value,
+            "clazzCode": document.getElementById('clazzCode').value,
+            "clazzDescription": document.getElementById('clazzDescription').value,
+        }
+
+        let xhr = new XMLHttpRequest()
+
+        xhr.open('post', 'http://localhost:3000/clazz')
+
+        console.log(clazz)
+
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8')
+
+        xhr.send(JSON.stringify(clazz))
+
+        xhr.onload = function () {
+            let clazz = JSON.parse(xhr.response)
+
+            let mytbody = document.getElementById('mytbody')
+            let newRow = mytbody.insertRow(mytbody.rows.length)
+            let col1 = newRow.insertCell(0)
+            col1.innerHTML = clazz.clazzId;
+            let col2 = newRow.insertCell(1);
+            col2.innerHTML = clazz.clazzName;
+            let col3 = newRow.insertCell(2);
+            col3.innerHTML = clazz.clazzCode;
+            let col4 = newRow.insertCell(3);
+            col4.innerHTML = clazz.clazzDescription;
+
+            // 清空表格
+            document.getElementById('clazzId').value = ''
+            document.getElementById('clazzName').value = ''
+            document.getElementById('clazzCode').value = ''
+            document.getElementById('clazzDescription').value = ''
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

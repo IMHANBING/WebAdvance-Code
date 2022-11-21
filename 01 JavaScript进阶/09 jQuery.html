@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <link rel="stylesheet" href="CSS/table.css">
+</head>
+<body>
+
+<table width="80%"
+       border="0"
+       cellspacing="0"
+       cellpadding="5"
+       align="center">
+    <tr>
+        <td>班级列表
+            <button type="button" onclick="getData()">获取数据</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table id="mytable"
+                   width="100%"
+                   cellspacing="0"
+                   cellpadding="5"
+                   border="1">
+                <thead>
+                <tr>
+                    <td>班级id</td>
+                    <td>班级名称</td>
+                    <td>班级编号</td>
+                    <td>班级简介</td>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <form name="myform">
+                <table border="1"
+                       width="100%"
+                       cellspacing="0"
+                       cellpadding="5">
+                    <tr>
+                        <td colspan="2">添加班级</td>
+                    </tr>
+                    <tr>
+                        <td>班级id</td>
+                        <td><input id="clazzId" value="10001"></td>
+                    </tr>
+                    <tr>
+                        <td>班级名称</td>
+                        <td><input id="clazzName" value="软件1801"></td>
+                    </tr>
+                    <tr>
+                        <td>班级编号</td>
+                        <td><input id="clazzCode" value="rj1801"></td>
+                    </tr>
+                    <tr>
+                        <td>班级简介</td>
+                        <td><input id="clazzDescription" value="软件1801">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            <button type="button" onclick="save()">保存数据</button>
+        </td>
+    </tr>
+</table>
+
+
+<script src="jQuery/jquery-3.6.1.min.js"></script>
+<script>
+
+    // $ 代表就是 jQuery对象 : " $.ajax() == jQuery.ajax() "
+
+    function getData() {
+
+        let url = 'http://localhost:3000/clazz'
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data, status) {
+                if (status == 'success') {
+
+                    let mytable = document.getElementById('mytable')
+                    let mytbody = mytable.getElementsByTagName('tbody')[0]
+
+                    data.forEach(clazz => {
+                        let newRow = mytbody.insertRow(mytbody.rows.length)
+                        //3.1 插入新单元格
+                        let col0 = newRow.insertCell(0)
+                        // 3.2 单元格赋值
+                        col0.innerHTML = clazz.clazzId
+                        let col1 = newRow.insertCell(1)
+                        col1.innerHTML = clazz.clazzName
+                        let col2 = newRow.insertCell(2)
+                        col2.innerHTML = clazz.clazzCode
+                        let col3 = newRow.insertCell(3)
+                        col3.innerHTML = clazz.clazzDescription
+                    })
+                }
+            },
+            error: function (xhr, status, error) {
+
+            },
+            complete: function () {
+
+            }
+        })
+    }
+
+    function save() {
+
+        // 从表单获得数据,构造要发送的数据格式:json
+        let clazz = {
+            "id": Math.ceil(Math.random() * 1000),
+            "clazzId": document.getElementById('clazzId').value,
+            "clazzName": document.getElementById('clazzName').value,
+            "clazzCode": document.getElementById('clazzCode').value,
+            "clazzDescription": document.getElementById('clazzDescription').value
+        }
+        // 要发送的地址
+        let url = 'http://localhost:3000/clazz'
+        $.ajax({
+            url: url,
+            type: 'POST',
+            contentType: 'application/json; charset=UTF-8',
+            data: JSON.stringify(clazz),
+            dataType: 'json',
+            success: function (data, status) {
+                // 更新表格
+                let mytable = document.getElementById('mytable')
+                let mytbody = mytable.getElementsByTagName('tbody')[0]
+
+                let newRow = mytbody.insertRow(mytbody.rows.length)
+                let col1 = newRow.insertCell(0)
+                col1.innerHTML = clazz.clazzId;
+                let col2 = newRow.insertCell(1);
+                col2.innerHTML = clazz.clazzName;
+                let col3 = newRow.insertCell(2);
+                col3.innerHTML = clazz.clazzCode;
+                let col4 = newRow.insertCell(3);
+                col4.innerHTML = clazz.clazzDescription;
+
+                // 清空表格
+                document.getElementById('clazzId').value = ''
+                document.getElementById('clazzName').value = ''
+                document.getElementById('clazzCode').value = ''
+                document.getElementById('clazzDescription').value = ''
+
+            },
+            error: function (xhr, status, error) {
+
+            }
+        })
+    }
+
+
+</script>
+
+
+</body>
+</html>
