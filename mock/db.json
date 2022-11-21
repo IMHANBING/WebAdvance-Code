@@ -6,6 +6,14 @@
       "clazzCode": "rj1801",
       "clazzDescription": "",
       "id": 1
+    },
+    {
+      "id": 756,
+      "clazzId": "10001",
+      "clazzName": "软件1801",
+      "clazzCode": "rj1801",
+      "clazzDescription": "软件1801"
     }
-  ]
+  ],
+  "student": []
 }

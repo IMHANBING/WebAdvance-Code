@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Fetch API</title>
-    <link rel="stylesheet" href="CSS/table.css">
+    <link rel="stylesheet" href="../static/CSS/table.css">
 </head>
 <body>
 <table width="80%"
@@ -135,7 +135,7 @@
     async function save() {
 
         // 从表单获得数据,构造要发送的数据格式:json
-        let data = {
+        let clazz = {
             "id": Math.ceil(Math.random() * 1000),
             "clazzId": document.getElementById('clazzId').value,
             "clazzName": document.getElementById('clazzName').value,
@@ -147,7 +147,7 @@
         // 封装消息
         let msg = {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(clazz),
             headers: new Headers({
                 'Content-Type': 'application/json'
             })

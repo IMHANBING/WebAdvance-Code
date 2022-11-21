@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>jQuery</title>
+    <title>Axios Ajax</title>
     <link rel="stylesheet" href="../static/CSS/table.css">
 </head>
 <body>
-
 <table width="80%"
        border="0"
        cellspacing="0"
@@ -77,48 +76,45 @@
     </tr>
 </table>
 
+<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 
-<script src="../static/jQuery/jquery-3.6.1.min.js"></script>
 <script>
 
-    // $ 代表就是 jQuery对象 : " $.ajax() == jQuery.ajax() "
+    // 统一设置Axios
+    axios.defaults.baseURL = 'http://localhost:3000'
+    axios.defaults.headers['Content-Type'] = 'application/json; charset=UTF-8'
 
     function getData() {
 
-        let url = 'http://localhost:3000/clazz'
+        // 直接使用axios请求
+        axios.get('/clazz').then(response => {
+            console.log(response)
 
-        $.ajax({
-            url: url,
-            type: 'GET',
-            dataType: 'json',
-            success: function (data, status) {
-                if (status == 'success') {
+            if (response.status == 200 || response.status == 201) {
+                // 从响应里面取数据
+                let data = response.data
+                let mytable = document.getElementById('mytable')
+                let mytbody = mytable.getElementsByTagName('tbody')[0]
 
-                    let mytable = document.getElementById('mytable')
-                    let mytbody = mytable.getElementsByTagName('tbody')[0]
-
-                    data.forEach(clazz => {
-                        let newRow = mytbody.insertRow(mytbody.rows.length)
-                        //3.1 插入新单元格
-                        let col0 = newRow.insertCell(0)
-                        // 3.2 单元格赋值
-                        col0.innerHTML = clazz.clazzId
-                        let col1 = newRow.insertCell(1)
-                        col1.innerHTML = clazz.clazzName
-                        let col2 = newRow.insertCell(2)
-                        col2.innerHTML = clazz.clazzCode
-                        let col3 = newRow.insertCell(3)
-                        col3.innerHTML = clazz.clazzDescription
-                    })
-                }
-            },
-            error: function (xhr, status, error) {
-
-            },
-            complete: function () {
-
+                data.forEach(clazz => {
+                    let newRow = mytbody.insertRow(mytbody.rows.length)
+                    //3.1 插入新单元格
+                    let col0 = newRow.insertCell(0)
+                    // 3.2 单元格赋值
+                    col0.innerHTML = clazz.clazzId
+                    let col1 = newRow.insertCell(1)
+                    col1.innerHTML = clazz.clazzName
+                    let col2 = newRow.insertCell(2)
+                    col2.innerHTML = clazz.clazzCode
+                    let col3 = newRow.insertCell(3)
+                    col3.innerHTML = clazz.clazzDescription
+                })
             }
+        }).catch(err => {
+            console.log(err)
+            alert('请求失败')
         })
+        axios.get('/student')
     }
 
     function save() {
@@ -131,45 +127,34 @@
             "clazzCode": document.getElementById('clazzCode').value,
             "clazzDescription": document.getElementById('clazzDescription').value
         }
-        // 要发送的地址
-        let url = 'http://localhost:3000/clazz'
-        $.ajax({
-            url: url,
-            type: 'POST',
-            contentType: 'application/json; charset=UTF-8',
-            data: JSON.stringify(clazz),
-            dataType: 'json',
-            success: function (data, status) {
-                // 更新表格
-                let mytable = document.getElementById('mytable')
-                let mytbody = mytable.getElementsByTagName('tbody')[0]
 
-                let newRow = mytbody.insertRow(mytbody.rows.length)
-                let col1 = newRow.insertCell(0)
-                col1.innerHTML = clazz.clazzId;
-                let col2 = newRow.insertCell(1);
-                col2.innerHTML = clazz.clazzName;
-                let col3 = newRow.insertCell(2);
-                col3.innerHTML = clazz.clazzCode;
-                let col4 = newRow.insertCell(3);
-                col4.innerHTML = clazz.clazzDescription;
+        axios.post('/clazz', clazz).then(response => {
+            let data = response.data
+            // 更新表格
+            let mytable = document.getElementById('mytable')
+            let mytbody = mytable.getElementsByTagName('tbody')[0]
 
-                // 清空表格
-                document.getElementById('clazzId').value = ''
-                document.getElementById('clazzName').value = ''
-                document.getElementById('clazzCode').value = ''
-                document.getElementById('clazzDescription').value = ''
+            let newRow = mytbody.insertRow(mytbody.rows.length)
+            let col1 = newRow.insertCell(0)
+            col1.innerHTML = clazz.clazzId;
+            let col2 = newRow.insertCell(1);
+            col2.innerHTML = clazz.clazzName;
+            let col3 = newRow.insertCell(2);
+            col3.innerHTML = clazz.clazzCode;
+            let col4 = newRow.insertCell(3);
+            col4.innerHTML = clazz.clazzDescription;
 
-            },
-            error: function (xhr, status, error) {
-
-            }
+            // 清空表格
+            document.getElementById('clazzId').value = ''
+            document.getElementById('clazzName').value = ''
+            document.getElementById('clazzCode').value = ''
+            document.getElementById('clazzDescription').value = ''
+        }).catch(err => {
+            alert(err)
         })
     }
 
-
 </script>
-
 
 </body>
 </html>
