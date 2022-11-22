@@ -1,18 +1,25 @@
 {
   "clazz": [
     {
-      "clazzId": "6771",
-      "clazzName": "软件1801",
-      "clazzCode": "rj1801",
-      "clazzDescription": "",
-      "id": 1
-    },
-    {
       "id": 756,
       "clazzId": "10001",
       "clazzName": "软件1801",
       "clazzCode": "rj1801",
       "clazzDescription": "软件1801"
+    },
+    {
+      "id": 333,
+      "clazzId": "2003",
+      "clazzName": "软件2003",
+      "clazzCode": "rj2003",
+      "clazzDescription": "软件2003"
+    },
+    {
+      "id": 482,
+      "clazzId": "2001",
+      "clazzName": "软件2001",
+      "clazzCode": "rj2001",
+      "clazzDescription": "软件2001"
     }
   ],
   "student": []
