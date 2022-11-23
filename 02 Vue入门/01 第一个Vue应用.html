@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个Vue应用</title>
+</head>
+<body>
+
+
+<!-- 1 定义一个容器，用于挂载Vue实例-->
+<div id="app">
+
+    <!-- 使用Vue提供的模板语法，渲染数据-->
+    {{message}}
+
+</div>
+
+<!-- 2 引入Vue库，要锁定版本-->
+<!--<script src="https://unpkg.com/vue@3.2.45/dist/vue.global.js"></script>-->
+
+<!-- 3 本地引用-->
+<script src="../static/vue3/vue.global.prod.js"></script>
+
+<script>
+
+    // 4 从Vue对象导入createApp方法，Vue3使用createApp方法创建Vue实例
+    const {createApp} = Vue
+
+    // 5 使用createApp方法创建vue实例
+    const myapp = createApp({
+        // 用到数据，vue，会自动处理这里面的数据
+        data() {
+            return {
+                message: '第一个Vue应用',
+            }
+        }
+    })
+
+    // 6 把vue实例挂载到容器上
+    myapp.mount('#app')
+
+</script>
+
+
+</body>
+</html>

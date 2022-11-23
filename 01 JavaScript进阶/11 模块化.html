@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模块化</title>
+</head>
+<body>
+
+
+<script type="module">
+
+    import {newString, year, message as msg} from "./js/a.js"
+    import message2 from "./js/a.js"
+
+    console.log(newString)
+    msg()
+    message2()
+
+
+</script>
+
+</body>
+</html>
