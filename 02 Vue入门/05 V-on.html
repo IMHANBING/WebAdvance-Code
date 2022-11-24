@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V-on</title>
+    <link rel="stylesheet" href="../static/CSS/stable.css">
+</head>
+<body>
+
+<script src="../static/vue3/vue.global.prod.js"></script>
+
+<div id="app">
+
+    {{ content }}
+    <button type="button" v-on:click="doSomething()">单击</button>
+    <button type="button" v-on:mouseleave="doSomething()">滑过</button>
+
+    <!-- V-on简写方式 -->
+    <button type="button" @mouseleave="changeVal">滑过增加</button>
+
+</div>
+
+<script>
+    const {createApp} = Vue
+
+    const myapp = createApp({
+        data() {
+            return {
+                content: 'Hello'
+            }
+        },
+
+        methods: {
+            doSomething() {
+                console.log('输出日志')
+            },
+
+            changeVal() {
+                this.content = this.content + 'Velvet'
+            }
+        }
+    })
+    myapp.mount('#app')
+
+</script>
+
+</body>
+</html>

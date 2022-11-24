@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据属性</title>
+    <link rel="stylesheet" href="../static/CSS/stable.css">
+</head>
+<body>
+
+
+<div id="app">
+
+    {{ message }}
+
+    <br>
+
+    {{ school.name + '在' + school.address }}
+
+    <br>
+
+    <ul>
+        <li>{{ college[0] }}</li>
+        <li>{{ college[1] }}</li>
+        <li>{{ college[2] }}</li>
+    </ul>
+
+</div>
+
+
+<script src="https://unpkg.com/vue@3.2.45/dist/vue.global.prod.js"></script>
+
+<script>
+
+    const {createApp} = Vue
+
+    const myapp = createApp({
+        data() {
+            return {
+                // 定义数据：可以是简单的属性，可以是对象，也可以是数组
+                message: 'Hello Vue',
+
+                school: {
+                    name: '海滨学院',
+                    address: '黄骅市'
+                },
+
+                college: ['计算机学院', '外国语学院', '经管学院']
+            }
+        }
+    })
+
+    myapp.mount('#app')
+
+
+</script>
+
+</body>
+</html>

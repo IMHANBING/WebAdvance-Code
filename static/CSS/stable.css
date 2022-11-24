@@ -1,0 +1,49 @@
+/* body样式 */
+body {
+    width: auto;
+    height: auto;
+    background-image: url("../foto/flwr.jpg");
+    background-size: 100%;
+    background-repeat: space;
+}
+/* div样式 */
+div {
+    font-size: 1em;
+    color: lightcyan;
+}
+/* button样式 */
+button {
+    color: cornflowerblue;
+    background-color: lightcyan;
+    border: cornflowerblue 2px dotted;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+button:hover {
+    color: lavender;
+    background-color: slateblue;
+    border: 2px dotted aquamarine;
+    border-radius: 10px;
+}
+
+button:active {
+    color: lightcyan;
+    background-color: aquamarine;
+    border: 2px dotted lavender;
+    border-radius: 10px;
+}
+
+/* 输入框样式 */
+input {
+    width: 200px;
+    color: mediumslateblue;
+    background-color: aliceblue;
+    font-size: 20px;
+    border: 2px dashed cornflowerblue;
+    border-radius: 10px;
+}
+
+a {
+    color: lightseagreen;
+}

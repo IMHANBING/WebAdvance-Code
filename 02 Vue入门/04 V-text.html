@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V-text</title>
+    <link rel="stylesheet" href="../static/CSS/stable.css">
+</head>
+<body>
+
+<div id="app">
+
+    <h1 v-text="content + '在黄骅'"></h1>
+    <h1 v-text="content + '在黄骅'">,骅西街道</h1>
+
+    <h1>{{content + '在黄骅'}},骅西街道</h1>
+
+    <h1 v-text="url"></h1>
+    <h1>{{url}}</h1>
+
+    <h1 v-html="url"></h1>
+
+</div>
+
+<script src="https://unpkg.com/vue@3.2.45/dist/vue.global.js"></script>
+
+
+<script>
+
+    const {createApp} = Vue
+
+    const myapp = createApp({
+
+        data() {
+            return {
+                content: 'Velvet',
+                url: '<a href = "https://www.czjtu.edu.cn/">海滨学院</a>'
+            }
+        }
+    })
+
+    myapp.mount('#app')
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V-show</title>
+    <link rel="stylesheet" href="../static/CSS/stable.css">
+</head>
+<body>
+
+<div id="app">
+
+    <button type="button" @click="changeVal">显示/隐藏图片</button>
+
+    <br>
+
+    <img v-show="isShow" height="206" width="1324" src="https://www.czjtu.edu.cn/img/nav-show.jpg">
+
+    <h1 v-show="isShow">Velvet</h1>
+
+</div>
+
+
+<script src="../static/vue3/vue.global.prod.js"></script>
+
+<script>
+    const { createApp } = Vue
+
+    createApp({
+        data() {
+            return {
+                isShow: true
+            }
+        },
+
+        methods:{
+            changeVal(){
+                this.isShow = !this.isShow
+            }
+        }
+    }).mount('#app')
+</script>
+
+
+</body>
+</html>

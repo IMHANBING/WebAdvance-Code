@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>方法属性</title>
+    <link rel="stylesheet" href="../static/CSS/stable.css">
+</head>
+<body>
+
+<div id="app">
+
+    {{ a }}
+
+    <br>
+
+    <button type="button" @click="plus">加1</button>
+    <button type="button" @click="minus">减1</button>
+
+
+</div>
+
+<script src="https://unpkg.com/vue@3.2.45/dist/vue.global.prod.js"></script>
+
+<script>
+
+    const {createApp} = Vue
+
+    const myapp = createApp({
+        data() {
+            return {
+                message: 'Velvet message',
+                a: 0
+            }
+        },
+
+        //定义Vue中用到的方法，函数；可以在模版中调用，或其他函数中调用
+        methods: {
+            // 在方法中，可以使用this引用data里面的数据
+            plus: function () {
+                this.a++
+            },
+
+            minus() {
+                this.a--
+            },
+
+            init() {
+                console.log('从数据库获得数据')
+            },
+        },
+
+        mounted() {
+            console.log('这是实例挂载成功后')
+            this.init()
+        },
+
+        created() {     // 首先执行创建
+            console.log('这是实例创建成功后')
+            this.init()
+        },
+
+    })
+
+    myapp.mount('#app')
+
+</script>
+
+</body>
+</html>
