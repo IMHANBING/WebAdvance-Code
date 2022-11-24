@@ -10,6 +10,14 @@
 
 <div id="app">
 
+    <button type="button" @click="changeVal1">计算机学院</button>
+    <button type="button" @click="changeVal2">经管学院</button>
+
+    <br>
+
+    <img width="1000" height="200" v-bind:src="url"/>
+    <!-- V-bind简写 -->
+    <img width="1200" height="240" :src="url"/>
 
 </div>
 
@@ -28,11 +36,11 @@
         },
 
         methods: {
-            changeVal1(){
-                this.url =  'https://computer.czjtu.edu.cn/images/jsjlogo.png'
+            changeVal1() {
+                this.url = 'https://computer.czjtu.edu.cn/images/jsjlogo.png'
             },
-            changeVal2(){
-                this.url =  'https://em.czjtu.edu.cn/images/jglogo.png'
+            changeVal2() {
+                this.url = 'https://em.czjtu.edu.cn/images/jglogo.png'
             }
         }
     }).mount('#app')

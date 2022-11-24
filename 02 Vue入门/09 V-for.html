@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V-for</title>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="../static/CSS/table.css">
+    <link rel="stylesheet" href="../static/CSS/stable.css">
+</head>
+<body>
+
+<div id="app">
+
+    <table border="1" width="50%" align="center" cellpadding="5" cellspacing="0">
+        <tr>
+            <td>序号</td>
+            <td>姓名</td>
+            <td>性别</td>
+            <td>年龄</td>
+        </tr>
+        <tbody>
+        <tr v-for="(student,index) in students">
+            <td>{{ index + 1 }}</td>
+            <td>{{ student.name }}</td>
+            <td>
+                <span v-if="student.sex === 0">男</span>
+                <span v-if="student.sex === 1">女</span>
+            </td>
+            <td>{{ student.age }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+<script src="../static/vue3/vue.global.prod.js"></script>
+
+<script>
+
+    const {createApp} = Vue
+
+    createApp({
+        data() {
+            return {
+                students: [
+                    {
+                        name: '张三',
+                        sex: 0,
+                        age: 19
+                    },
+                    {
+                        name: '李四',
+                        sex: 1,
+                        age: 28
+                    },
+                    {
+                        name: '王五',
+                        sex: 0,
+                        age: 11
+                    },
+                    {
+                        name: 'Velvet',
+                        sex: 1,
+                        age: 20
+                    }
+                ]
+            }
+        },
+
+        methods: {
+            1() {
+
+            }
+
+        }
+    }).mount('#app')
+
+</script>
+
+</body>
+</html>

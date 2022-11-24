@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>V-model</title>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="../static/CSS/stable.css">
+</head>
+<body>
+
+<div id="app">
+
+    <form v-model="student">
+
+        姓 名:<input type="text" v-model="student.name">     <br>
+        年 龄:<input type="text" v-model="student.age">      <br>
+
+    </form>
+
+    <button type="button" @click="changeVal">改变数据</button>
+
+</div>
+
+
+<script src="../static/vue3/vue.global.prod.js"></script>
+
+<script>
+
+    const {createApp} = Vue
+
+    createApp({
+        data() {
+            return {
+                student: {
+                    name: 'Velvet',
+                    age: 19
+                }
+            }
+        },
+
+        methods: {
+            changeVal() {
+                this.student = {
+                    name: 'iris',
+                    age: 20
+                }
+            }
+        },
+    }).mount('#app')
+
+</script>
+
+</body>
+</html>

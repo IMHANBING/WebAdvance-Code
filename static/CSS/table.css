@@ -59,11 +59,3 @@ input {
     border: 2px dashed cornflowerblue;
     border-radius: 10px;
 }
-
-body {
-    width: auto;
-    height: auto;
-    background-image: url("../foto/flwr.jpg");
-    background-size: 100%;
-    background-repeat: space;
-}

@@ -14,5 +14,9 @@
     <orderEntry type="library" name="jquery-3.6.1" level="application" />
     <orderEntry type="library" name="vue" level="application" />
     <orderEntry type="library" name="vue" level="application" />
+    <orderEntry type="library" name="index" level="application" />
+    <orderEntry type="library" name="vue.global" level="application" />
+    <orderEntry type="library" name="index.full" level="application" />
+    <orderEntry type="library" name="element-plus" level="application" />
   </component>
 </module>

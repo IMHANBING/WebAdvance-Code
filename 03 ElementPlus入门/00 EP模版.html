@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个 Element应用</title>
+    <link href="../static/elementplus/index.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<div id="app">
+    <el-button @click="visible=true">按钮</el-button>
+
+    <el-dialog v-model="visible" title="对话框">
+        欢迎使用Element
+    </el-dialog>
+</div>
+
+<script src="../static/vue3/vue.global.js"></script>
+<script src="../static/elementplus/index.full.js"></script>
+<script src="../static/elementplus/zh-cn.js"></script>
+<script src="../static/elementplus/icons-vue/index.iife.js"></script>
+
+<script>
+    const {createApp} = Vue;
+
+    const myapp = createApp({
+        data(){
+            return {
+                visible:false,
+            }
+        }
+    });
+
+    myapp.use(ElementPlus,{locale:ElementPlusLocaleZhCn});
+    for(const [key,component] of Object.entries(ElementPlusIconsVue)){
+        myapp.component(key,component);
+    }
+
+    myapp.mount('#app');
+
+</script>
+</body>
+</html>

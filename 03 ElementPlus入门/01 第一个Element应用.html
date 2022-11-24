@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个 Element应用 </title>
+    <!-- 3 引入element css-->
+    <link href="../static/elementplus/index.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<!-- 1 创建一个容器，用于挂载vue实例 -->
+<div id="app">
+    <el-button @click="visible=true">按钮</el-button>
+
+    <el-dialog v-model="visible" title="对话框">
+        欢迎使用Element
+    </el-dialog>
+
+</div>
+
+<!-- 2 引入js库 -->
+<script src="../static/vue3/vue.global.js"></script>
+<script src="../static/elementplus/index.full.js"></script>
+<script src="../static/elementplus/zh-cn.js"></script>
+<script src="../static/elementplus/icons-vue/index.iife.js"></script>
+
+<script>
+    // 4 导入 createApp方法
+    const {createApp} = Vue
+
+    // 5 创建实例
+    const myapp = createApp({
+        data() {
+            return {
+                visible: false
+            }
+        }
+    });
+
+    // 6 使用element
+    myapp.use(ElementPlus, {locale: ElementPlusLocaleZhCn});
+    // 7 注册element 图标
+    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+        myapp.component(key, component)
+    }
+
+    // 8 把vue实例挂载到容器
+    myapp.mount('#app')
+
+</script>
+</body>
+</html>
