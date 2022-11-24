@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>V-bind</title>
     <!-- My CSS -->
     <link rel="stylesheet" href="../static/CSS/stable.css">
 </head>
@@ -23,12 +23,17 @@
     createApp({
         data() {
             return {
-
+                url: 'https://computer.czjtu.edu.cn/images/jsjlogo.png'
             }
         },
 
         methods: {
-
+            changeVal1(){
+                this.url =  'https://computer.czjtu.edu.cn/images/jsjlogo.png'
+            },
+            changeVal2(){
+                this.url =  'https://em.czjtu.edu.cn/images/jglogo.png'
+            }
         }
     }).mount('#app')
 

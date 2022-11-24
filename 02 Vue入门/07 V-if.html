@@ -3,13 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>V-if</title>
+    <link rel="stylesheet" href="../static/CSS/table.css">
     <link rel="stylesheet" href="../static/CSS/stable.css">
 </head>
 <body>
 
 <div id="app">
 
+    <table border="1">
+        <tr>
+            <td>姓名</td>
+            <td>姓别</td>
+        </tr>
+        <tr>
+            <td>张三</td>
+            <td>
+                <span v-if="sex == 0">男</span>
+                <span v-if="sex == 1">女</span>
+            </td>
+        </tr>
+        <tr>
+            <td>李四</td>
+            <td>
+                <span v-if="sex == 0">男</span>
+                <span v-if="sex == 1">女</span>
+            </td>
+        </tr>
+    </table>
 
+    <button style="margin-left: 615px; margin-top: 20px" type="button" @click="changeVal">改变性别</button>
 
 </div>
 
@@ -17,12 +39,22 @@
 <script src="../static/vue3/vue.global.prod.js"></script>
 
 <script>
-    const { createApp } = Vue
+    const {createApp} = Vue
 
     createApp({
         data() {
             return {
+                sex: 0
+            }
+        },
 
+        methods: {
+            changeVal() {
+                if (this.sex == 0) {
+                    this.sex = 1
+                } else {
+                    this.sex = 0
+                }
             }
         }
     }).mount('#app')
