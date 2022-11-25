@@ -2,14 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EP模板</title>
+    <title>按钮</title>
     <link href="../static/elementplus/index.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 
 <div id="app">
 
-    <el-button type="primary" loading>Loading</el-button>
+    <el-row class="mb-4">
+        <el-button disabled type="danger">Default</el-button>
+        <el-button type="primary">Primary</el-button>
+        <el-button type="success">Success</el-button>
+        <el-button type="info" >Info</el-button>
+        <el-button type="warning" round>Warning</el-button>
+        <el-button type="danger" plain>
+            <el-icon :size="20"><Close /></el-icon>
+            Danger
+        </el-button>
+        <el-button type="primary" loading>Loading</el-button>
+    </el-row>
 
 </div>
 
@@ -27,10 +38,6 @@
             return {
 
             }
-        },
-
-        methods:{
-
         }
     });
 
@@ -42,6 +49,5 @@
     myapp.mount('#app');
 
 </script>
-
 </body>
 </html>

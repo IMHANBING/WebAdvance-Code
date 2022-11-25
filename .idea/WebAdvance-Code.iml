@@ -18,5 +18,6 @@
     <orderEntry type="library" name="vue.global" level="application" />
     <orderEntry type="library" name="index.full" level="application" />
     <orderEntry type="library" name="element-plus" level="application" />
+    <orderEntry type="library" name="index" level="application" />
   </component>
 </module>

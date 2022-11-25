@@ -10,6 +10,7 @@
 
 <!-- 1 创建一个容器，用于挂载vue实例 -->
 <div id="app">
+
     <el-button @click="visible=true">按钮</el-button>
 
     <el-dialog v-model="visible" title="对话框">
@@ -25,6 +26,7 @@
 <script src="../static/elementplus/icons-vue/index.iife.js"></script>
 
 <script>
+
     // 4 导入 createApp方法
     const {createApp} = Vue
 
@@ -48,5 +50,6 @@
     myapp.mount('#app')
 
 </script>
+
 </body>
 </html>

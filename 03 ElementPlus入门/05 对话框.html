@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对话框</title>
+    <link href="../static/elementplus/index.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<div id="app">
+
+    <el-button type="primary" @click="add">添加学生</el-button>
+
+    <el-dialog
+            v-model="dialog.show"
+            :title="dialog.title"
+            :close-on-click-modal="false"
+            :close-on-press-escape="false">
+
+        <el-form :model="student" label-width="120px">
+
+            <el-form-item label="姓名">
+                <el-input v-model="student.studentName"></el-input>
+            </el-form-item>
+
+            <el-form-item label="年龄">
+                <el-input v-model="student.studentAge"></el-input>
+            </el-form-item>
+
+            <el-form-item>
+                <el-button type="primary" @click="save">保存</el-button>
+                <el-button @click="dialog.show=false">取消</el-button>
+            </el-form-item>
+
+        </el-form>
+
+    </el-dialog>
+
+</div>
+
+<script src="../static/vue3/vue.global.js"></script>
+<script src="../static/elementplus/index.full.js"></script>
+<script src="../static/elementplus/zh-cn.js"></script>
+<script src="../static/elementplus/icons-vue/index.iife.js"></script>
+
+<script>
+
+    const {createApp} = Vue;
+
+    const myapp = createApp({
+        data() {
+            return {
+                dialog: {
+                    show: false,
+                    title: '',
+                    type: ''
+                },
+                student: {
+                    studentName: 'Velvet',
+                    studentAge: 19
+                }
+            }
+        },
+
+        methods: {
+            add() {
+                // 打开对话框
+                this.dialog = {
+                    show: true,
+                    title: '添加学生',
+                    type: 'add'
+                }
+            },
+            save() {
+                console.log(this.student)
+                // 关闭对话框
+                this.dialog = {
+                    show: false,
+                    title: '',
+                    type: ''
+                }
+
+                //清空表单
+                this.student = {
+                    studentName: '',
+                    studentAge: ''
+                }
+            }
+        }
+    });
+
+    myapp.use(ElementPlus, {locale: ElementPlusLocaleZhCn});
+    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+        myapp.component(key, component);
+    }
+
+    myapp.mount('#app');
+
+</script>
+
+</body>
+</html>

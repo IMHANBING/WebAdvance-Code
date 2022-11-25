@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格</title>
+    <link href="../static/elementplus/index.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<div id="app">
+
+    <!-- 使用data属性绑定想要展现的数据 -->
+    <el-table :data="students" stripe style="width: 80%">
+        <!-- 使用prop属性绑定对象的属性值，label定义列名 -->
+        <el-table-column
+                prop="studentName"
+                label="姓名"
+                width="180">
+
+        </el-table-column>
+
+        <el-table-column
+                prop="studentAge"
+                label="年龄"
+                width="180">
+
+        </el-table-column>
+    </el-table>
+
+</div>
+
+<script src="../static/vue3/vue.global.js"></script>
+<script src="../static/elementplus/index.full.js"></script>
+<script src="../static/elementplus/zh-cn.js"></script>
+<script src="../static/elementplus/icons-vue/index.iife.js"></script>
+
+<script>
+
+    const {createApp} = Vue;
+
+    const myapp = createApp({
+        data(){
+            return {
+                students:[
+                    {
+                        studentName: '张三',
+                        studentAge: 19
+                    },
+                    {
+                        studentName: '李四',
+                        studentAge: 20
+                    },
+                    {
+                        studentName: '王五',
+                        studentAge: 21
+                    },
+                    {
+                        studentName: 'Velvet',
+                        studentAge: 22
+                    },
+                ]
+            }
+        }
+    });
+
+    myapp.use(ElementPlus,{locale:ElementPlusLocaleZhCn});
+    for(const [key,component] of Object.entries(ElementPlusIconsVue)){
+        myapp.component(key,component);
+    }
+
+    myapp.mount('#app');
+
+</script>
+</body>
+</html>
